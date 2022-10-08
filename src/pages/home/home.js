@@ -9,9 +9,9 @@ export default function Home() {
             id: 1,
             name: "James King",
             position: "Presedient and CEO",
-            officePhone: "+1",
-            mobilePhone: "+2",
-            sms: "+3",
+            officePhone: "+123-4567-8910",
+            mobilePhone: "+123-456-7890",
+            sms: "+123-4567-8910",
             email: "jk@gmail.com",
             img: "https://www.w3schools.com/howto/img_avatar.png"
         },
@@ -23,19 +23,51 @@ export default function Home() {
             mobilePhone: "617-000-0002",
             sms: "617-000-0002",
             email: "jtaylor@fakemail.com",
-            img: "https://www.w3schools.com/howto/img_avatar2.png"
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZLj-_GvAq3uElBjhHjivCw_QX2hBpiJxfhA&usqp=CAU"
         },
         {
             id: 3,
-            name: "James King 3",
-            position: "Presedient and CEO",
+            name: "Eugene lee",
+            position: "CEO",
             officePhone: "+1",
             mobilePhone: "+2",
             sms: "+3",
-            email: "jk@gmail.com",
+            email: "El@gmail.com",
             img: "https://www.w3schools.com/howto/img_avatar.png"
-        }
+        },
+        {
+            id: 4,
+            name: "John williams",
+            position: "Vp of engineering",
+            officePhone: "+123-456-7891",
+            mobilePhone: "+2",
+            sms: "+3",
+            email: "jw@gmail.com",
+            img: "https://cdn-icons-png.flaticon.com/512/194/194938.png"  
+        },
+        {
+        id: 5,
+        name: "Ray Moope",
+        position: "vp of sales",
+        officePhone: "+123-456-7891",
+        mobilePhone: "+2",
+        sms: "+3",
+        email: "rm@gmail.com",
+        img: "https://www.w3schools.com/w3images/avatar6.png" 
+          
+    },
+    {
+    id: 6,
+    name: "paul Jones",
+    position: "QA Manager",
+    officePhone: "+123-456-7891",
+    mobilePhone: "+2",
+    sms: "+3",
+    email: "pu@gmail.com",
+    img: "https://www.lightningdesignsystem.com/assets/images/avatar2.jpg"  
+},
     ];
+
     const [employeesData, setEmployeesData] = useState(employees);
 
     const [employeeName, setEmployeeName] = useState();
