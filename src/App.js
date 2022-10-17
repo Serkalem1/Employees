@@ -5,7 +5,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom'
 
 function App() {
   return (
-    <div >
+    <div style={{padding:"60px"}}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />

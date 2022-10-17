@@ -1,93 +1,56 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import EmployeeCardIcon from "../../components/employeeCardIcon/employeeCardIcon";
+import EmployeeHeader from "../../components/employeeHeader/employeeHeader";
 import EmployeeListItem from "../../components/employeeListItem/employeeListItem";
 import Header from "../../components/header/header";
+import './home.css'
 
 export default function Home() {
-    const employees = [
-        {
-            id: 1,
-            name: "James King",
-            position: "Presedient and CEO",
-            officePhone: "+123-4567-8910",
-            mobilePhone: "+123-456-7890",
-            sms: "+123-4567-8910",
-            email: "jk@gmail.com",
-            img: "https://www.w3schools.com/howto/img_avatar.png"
-        },
-        {
-            id: 2,
-            name: "Julia Taylor",
-            position: "VP of Marketing",
-            officePhone: "781-000-0002",
-            mobilePhone: "617-000-0002",
-            sms: "617-000-0002",
-            email: "jtaylor@fakemail.com",
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZLj-_GvAq3uElBjhHjivCw_QX2hBpiJxfhA&usqp=CAU"
-        },
-        {
-            id: 3,
-            name: "Eugene lee",
-            position: "CEO",
-            officePhone: "+1",
-            mobilePhone: "+2",
-            sms: "+3",
-            email: "El@gmail.com",
-            img: "https://www.w3schools.com/howto/img_avatar.png"
-        },
-        {
-            id: 4,
-            name: "John williams",
-            position: "Vp of engineering",
-            officePhone: "+123-456-7891",
-            mobilePhone: "+2",
-            sms: "+3",
-            email: "jw@gmail.com",
-            img: "https://cdn-icons-png.flaticon.com/512/194/194938.png"  
-        },
-        {
-        id: 5,
-        name: "Ray Moope",
-        position: "vp of sales",
-        officePhone: "+123-456-7891",
-        mobilePhone: "+2",
-        sms: "+3",
-        email: "rm@gmail.com",
-        img: "https://www.w3schools.com/w3images/avatar6.png" 
-          
-    },
-    {
-    id: 6,
-    name: "paul Jones",
-    position: "QA Manager",
-    officePhone: "+123-456-7891",
-    mobilePhone: "+2",
-    sms: "+3",
-    email: "pu@gmail.com",
-    img: "https://www.lightningdesignsystem.com/assets/images/avatar2.jpg"  
-},
-    ];
-
-    const [employeesData, setEmployeesData] = useState(employees);
-
+    const [employeesData, setEmployeesData] = useState([]);
+    const [selectedEmployee, setSelectedEmployee] = useState();
     const [employeeName, setEmployeeName] = useState();
-    const navigate = useNavigate()
+    axios.defaults.baseURL = 'http://localhost:5000/api/employes/'
+    function setDefaultEmployee(){
+        setSelectedEmployee(employeesData[0])
+    }
     useEffect(() => {
-        setEmployeesData(employees)
+        axios.get('allemployees').then((res) => {
+            setEmployeesData(res.data)
+            setSelectedEmployee(res.data[0])
+        })
     }, [])
     useEffect(() => {
         if (employeeName)
-            setEmployeesData(employees.filter((elt) => elt.name.toLowerCase().indexOf(employeeName.toLowerCase()) !== -1))
+            axios.get(`employees?key=${employeeName}`).then((res) => {
+                setEmployeesData(res.data)
+                setSelectedEmployee(res.data[0])
+            })
         else
-            setEmployeesData(employees)
-
+            axios.get(`allemployees`).then((res) => {
+                setEmployeesData(res.data)
+                setSelectedEmployee(res.data[0])
+            })
     }, [employeeName])
     return (
-        <div style={{padding: "5px"}}>
-            <Header title="Employee Directory" />
-            <input onChange={(e) => setEmployeeName(e.target.value)} style={{width:"98%", height: "32px"}} />
-            <div style={{padding: "10px"}}>
-            {employeesData?.map((elt) => <div onClick={()=> navigate('employee',{ state: elt})}> <EmployeeListItem employee={elt} /></div>)}
+        <div className="container">
+            <div className="home-page">
+                <Header title="Employee Directory" />
+                <div style={{border: "green solid 3px" }}>
+                    <input className="search" onChange={(e) => setEmployeeName(e.target.value)}/>
+                </div>
+                <div style={{ padding: "3px",  border: "#b614e2 solid 3px" }}>
+                    {employeesData?.map((elt) => <div onClick={() => setSelectedEmployee(elt)}> <EmployeeListItem employee={elt} /></div>)}
+                </div>
+            </div>
+            <div className="emp-page">
+                {employeesData.length > 0 && <div >
+                    <Header title="Employee" hasBackButton={true} setDefaultEmployee={setDefaultEmployee}/>
+                    <div className="emp-dis">
+                        <EmployeeHeader employee={selectedEmployee} />
+                        <EmployeeCardIcon employee={selectedEmployee}/>
+                    </div>
+                </div>}
             </div>
         </div>
     )

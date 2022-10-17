@@ -1,11 +1,11 @@
 import './employeeCardIcon.css'
 export default function EmployeeCardIcon(props) {
-    const { name, email, sms, officePhone, mobilePhone } = props.employee
+    const { email, sms, officePhone, mobilePhone } = props.employee
     return (
         <div>
             <div className="emp-list" 
             onClick={()=>window.open(`tel:${officePhone}`)}
-            style={{ display: "flex", justifyContent: "space-between" }}>
+            >
                 <div>
                     <div>
                         Call Office
@@ -19,8 +19,7 @@ export default function EmployeeCardIcon(props) {
                 </div>
             </div>
             <div className="emp-list" 
-              onClick={()=>window.open(`tel:${officePhone}`)}
-            style={{ display: "flex", justifyContent: "space-between" }}>
+              onClick={()=>window.open(`tel:${officePhone}`)}>
                 <div>
                     <div>
                         Call Mobile
@@ -34,8 +33,7 @@ export default function EmployeeCardIcon(props) {
                 </div>
             </div>
             <div className="emp-list" 
-             onClick={()=>window.open(`sms:${officePhone}`)}
-            style={{ display: "flex", justifyContent: "space-between" }}>
+             onClick={()=>window.open(`sms:${officePhone}`)}>
                 <div>
                     <div>
                        SMS
@@ -49,8 +47,7 @@ export default function EmployeeCardIcon(props) {
                 </div>
             </div>
             <div className="emp-list" 
-            onClick={()=>window.open(`mailto:${email}`)}
-            style={{ display: "flex", justifyContent: "space-between" }}>
+            onClick={()=>window.open(`mailto:${email}`)}>
                 <div>
                     <div>
                        Email
